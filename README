@@ -1,0 +1,7 @@
+This script cleans up temporary and cache files on a Windows system, created by Windows itself, or various applications.
+
+The script supports limited runtime configuration. For more information about the available parameters, run `CleanupMess /h`.
+
+For more information about the script, see its contents. The lines starting with "echo" or "::" describe what the following section does.
+
+The script was tested on Windows 11.
