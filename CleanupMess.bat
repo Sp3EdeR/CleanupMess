@@ -1,6 +1,14 @@
 @echo off
 setlocal EnableDelayedExpansion
 
+cacls.exe "%SYSTEMROOT%\System32\config\system" 1>NUL 2>NUL
+if errorlevel 1 (
+	echo WARNING: Missing administrator privileges, some cleanups won't work.
+	echo          Run this script as administrator to be able to do everything.
+	echo.
+)
+
+:: Command line argument handling
 for %%A in (%*) do (
 	set arg=%%~A
 	set arg1=!arg:~0,1!
