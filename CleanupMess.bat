@@ -111,6 +111,8 @@ for /d %%U in ("C:\Users\*") do (
 	)
 
 	if not defined skipas (
+		echo   Clearing Android Studio crash logs
+		call :DelFiles %%~fU\java_error_in_studio64.hprof
 		if not defined androidUser (
 			echo   Clearing Android Studio Logs and Cache...
 			call :DelDir %%~fU\.android\breakpad
