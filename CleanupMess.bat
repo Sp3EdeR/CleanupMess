@@ -136,7 +136,7 @@ for /d %%U in ("C:\Users\*") do (
 		if not exist "!traktsdir!trakts.exe" if defined PIPX_BIN_DIR set "traktsdir=%PIPX_BIN_DIR%\"
 		if exist "!traktsdir!trakts.exe" (
 			if not defined mock ( "!traktsdir!trakts.exe" stop >NUL 2>NUL )
-			if defined outfile ( echo "!traktsdir!trakts.exe" stop ^>NUL 2^>NUL )
+			if defined outfile ( echo "!traktsdir!trakts.exe" stop ^>NUL 2^>NUL 1>>"%outfile%" )
 		)
 		call :DelFiles !appdata!\trakt-scrobbler\trakt_scrobbler.log
 		if exist "!traktsdir!trakts.exe" (
@@ -146,8 +146,8 @@ for /d %%U in ("C:\Users\*") do (
 				popd
 			)
 			if defined outfile (
-				echo pushd "!traktsdir!"
-				echo "!traktsdir!trakts.exe" start ^>NUL 2^>NUL
+				echo pushd "!traktsdir!" 1>>"%outfile%"
+				echo "!traktsdir!trakts.exe" start ^>NUL 2^>NUL 1>>"%outfile%"
 				echo popd
 			)
 		)
