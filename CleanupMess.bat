@@ -180,6 +180,18 @@ if not defined skiptemp (
 if not defined skipwinupd (
 	echo Clearing the Windows Update download cache...
 	call :DelContents C:\Windows\SoftwareDistribution\Download
+	echo Clearing the previous version of Windows...
+	for /d %%D in ("C:\Windows.old*") do (
+		if not defined mock (
+			takeown /F "%%~fD" /R /A /D Y >NUL 2>NUL
+			icacls "%%~fD" /grant:r *S-1-5-32-544:F /T /L /Q >NUL 2>NUL
+		)
+		if defined outfile (
+			echo takeown /F "%%~fD" /R /A /D Y ^>NUL 2^>NUL 1>>"%outfile%"
+			echo icacls "%%~fD" /grant:r *S-1-5-32-544:F /T /L /Q ^>NUL 2^>NUL 1>>"%outfile%"
+		)
+		call :DelDir %%~fD
+	)
 )
 
 if not defined skipprefetch (
@@ -277,7 +289,7 @@ echo - Visual Studio Code (/s vscode)
 echo - Windows cleanup manager's autoclean (/s cleanmgr)
 echo - Windows component (app installation cache) (/s dism)
 echo - Windows prefetch (app preloads) (/s prefetch)
-echo - Windows Update download cache (/s winupd)
+echo - Windows Update backups and download cache (/s winupd)
 exit /b 0
 
 :InitGlobals
