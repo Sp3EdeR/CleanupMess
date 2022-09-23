@@ -194,6 +194,11 @@ if not defined skipwinupd (
 	)
 )
 
+if not defined perflogs (
+	echo Clearing Windows performance logs...
+	call :DelDir C:\PerfLogs
+)
+
 if not defined skipprefetch (
 	echo Clearing the Windows Prefetch
 	call :DelFiles C:\Windows\Prefetch\*
@@ -288,13 +293,14 @@ echo - Trakt Scrobbler (/s trakts)
 echo - Visual Studio Code (/s vscode)
 echo - Windows cleanup manager's autoclean (/s cleanmgr)
 echo - Windows component (app installation cache) (/s dism)
+echo - Windows performance logs (/s perflogs)
 echo - Windows prefetch (app preloads) (/s prefetch)
 echo - Windows Update backups and download cache (/s winupd)
 exit /b 0
 
 :InitGlobals
 :: Skippable cleanups
-set skippables=nvidia:opera:chrome:inetexpl:thunderbird:discord:aiomessenger:steam:gdrive:gearth:as:psp:vscode:qbittorrent:trakts:temp:winupd:prefetch:recyclebin:cleanmgr:dism
+set skippables=nvidia:opera:chrome:inetexpl:thunderbird:discord:aiomessenger:steam:gdrive:gearth:as:psp:vscode:qbittorrent:trakts:temp:winupd:perflogs:prefetch:recyclebin:cleanmgr:dism
 :: Helper data to enumerate drives
 set allLetters=a b c d e f g h i j k l m n o p q r s t u v w x y z
 :: DISM switch to clean up thoroughly; prevents component uninstallation
