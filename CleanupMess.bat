@@ -138,7 +138,7 @@ for /d %%U in ("C:\Users\*") do (
 			if not defined mock ( "!traktsdir!trakts.exe" stop >NUL 2>NUL )
 			if defined outfile ( echo "!traktsdir!trakts.exe" stop ^>NUL 2^>NUL 1>>"%outfile%" )
 		)
-		call :DelFiles !appdata!\trakt-scrobbler\trakt_scrobbler.log
+		call :DelFiles !appdata!\trakt-scrobbler\trakt_scrobbler.log*
 		if exist "!traktsdir!trakts.exe" (
 			if not defined mock (
 				pushd "!traktsdir!"
