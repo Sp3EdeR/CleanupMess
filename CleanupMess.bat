@@ -15,6 +15,11 @@ if not defined skipnvidia (
 	call :DelFiles C:\ProgramData\NVIDIA Corporation\NetService\*.exe
 )
 
+if not defined skipmsi (
+	echo Clearing MSI installer temporary files...
+	call :DelDir C:\MSI\TestDownload
+)
+
 for /d %%U in ("C:\Users\*") do (
 	echo Clearing %%~nU's user directory:
 	set appdata=%%U\AppData\Roaming
@@ -281,6 +286,7 @@ echo - Discord chat app (/s discord)
 echo - Google Drive Desktop client (/s gdrive)
 echo - Google Earth client (/s gearth)
 echo - Internet Explore and Edge web browser caches (/s inetexpl)
+echo - MSI temporary files (/s msi)
 echo - nVidia video driver installation temporaries (/s nvidia)
 echo - Opera web browser caches (/s opera)
 echo - Paint Shop Pro graphics editor (/s psp)
@@ -300,7 +306,7 @@ exit /b 0
 
 :InitGlobals
 :: Skippable cleanups
-set skippables=nvidia:opera:chrome:inetexpl:thunderbird:discord:aiomessenger:steam:gdrive:gearth:as:psp:vscode:qbittorrent:trakts:temp:winupd:perflogs:prefetch:recyclebin:cleanmgr:dism
+set skippables=nvidia:msi:opera:chrome:inetexpl:thunderbird:discord:aiomessenger:steam:gdrive:gearth:as:psp:vscode:qbittorrent:trakts:temp:winupd:perflogs:prefetch:recyclebin:cleanmgr:dism
 :: Helper data to enumerate drives
 set allLetters=a b c d e f g h i j k l m n o p q r s t u v w x y z
 :: DISM switch to clean up thoroughly; prevents component uninstallation
