@@ -177,6 +177,11 @@ if not defined skipas (
 	)
 )
 
+if not defined displayfusion (
+	echo Clearing the DisplayFusion setup cache...
+	call :DelFiles C:\ProgramData\Binary Fortress Software\DisplayFusion\*Setup*
+)
+
 if not defined skiptemp (
 	echo Clearing global temp folders...
 	call :DelContents C:\Windows\Temp
@@ -283,6 +288,7 @@ echo - All-in-one messenger chat app (/s aiomessenger)
 echo - Android Studio integrated developer environment (/s as)
 echo - Chrome web browser caches (/s chrome)
 echo - Discord chat app (/s discord)
+echo - DisplayFusion Windows customization app (/s displayfusion)
 echo - Google Drive Desktop client (/s gdrive)
 echo - Google Earth client (/s gearth)
 echo - Internet Explore and Edge web browser caches (/s inetexpl)
@@ -306,7 +312,7 @@ exit /b 0
 
 :InitGlobals
 :: Skippable cleanups
-set skippables=nvidia:msi:opera:chrome:inetexpl:thunderbird:discord:aiomessenger:steam:gdrive:gearth:as:psp:vscode:qbittorrent:trakts:temp:winupd:perflogs:prefetch:recyclebin:cleanmgr:dism
+set skippables=nvidia:msi:opera:chrome:inetexpl:thunderbird:discord:aiomessenger:steam:gdrive:gearth:as:psp:vscode:qbittorrent:trakts:temp:winupd:perflogs:prefetch:recyclebin:cleanmgr:dism:displayfusion
 :: Helper data to enumerate drives
 set allLetters=a b c d e f g h i j k l m n o p q r s t u v w x y z
 :: DISM switch to clean up thoroughly; prevents component uninstallation
