@@ -51,6 +51,16 @@ for /d %%U in ("C:\Users\*") do (
 		call :DelDir !localappdata!\Google\Chrome\User Data\GrShaderCache
 	)
 
+	if not defined skipcaprine (
+		echo   Clearing Caprine caches...
+		call :DelDir !localappdata!\caprine-updater 
+		call :DelDir !appdata!\Caprine\Cache
+		call :DelDir !appdata!\Caprine\Code Cache
+		call :DelDir !appdata!\Caprine\DawnCache
+		call :DelDir !appdata!\Caprine\GPUCache
+		call :DelDir !appdata!\Caprine\IndexedDB
+	)
+
 	if not defined skipinetexpl (
 		echo   Clearing Internet Explorer caches...
 		call :DelContents !localappdata!\Microsoft\Windows\Temporary Internet Files
@@ -286,6 +296,7 @@ echo.
 echo Supported cleanup operations (skip if unwanted steps with /s):
 echo - All-in-one messenger chat app (/s aiomessenger)
 echo - Android Studio integrated developer environment (/s as)
+echo - Caprine chat app (/s caprine)
 echo - Chrome web browser caches (/s chrome)
 echo - Discord chat app (/s discord)
 echo - DisplayFusion Windows customization app (/s displayfusion)
@@ -312,7 +323,7 @@ exit /b 0
 
 :InitGlobals
 :: Skippable cleanups
-set skippables=nvidia:msi:opera:chrome:inetexpl:thunderbird:discord:aiomessenger:steam:gdrive:gearth:as:psp:vscode:qbittorrent:trakts:temp:winupd:perflogs:prefetch:recyclebin:cleanmgr:dism:displayfusion
+set skippables=nvidia:msi:opera:chrome:inetexpl:thunderbird:discord:aiomessenger:steam:gdrive:gearth:as:psp:vscode:qbittorrent:trakts:temp:winupd:perflogs:prefetch:recyclebin:cleanmgr:dism:displayfusion:caprine
 :: Helper data to enumerate drives
 set allLetters=a b c d e f g h i j k l m n o p q r s t u v w x y z
 :: DISM switch to clean up thoroughly; prevents component uninstallation
